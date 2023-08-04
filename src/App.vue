@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <nav>
-      <RouterLink v-for="route in routes" :key="route.path" :to="route.path">{{
+      <RouterLink class="router-link" v-for="route in routes" :key="route.path" :to="route.path">{{
         route.name
       }}</RouterLink>
     </nav>
@@ -16,39 +16,22 @@ import { RouterLink, RouterView } from 'vue-router'
   </section>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  height: 100px;
+  nav {
+    text-align: center;
+    padding: 2rem;
+    background-color: antiquewhite;
+  }
+  .router-link {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+section {
+  
+  padding: 0 100px;
 }
 </style>
