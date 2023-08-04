@@ -31,7 +31,6 @@ header {
   }
 }
 section {
-  
   padding: 0 100px;
 }
 </style>
