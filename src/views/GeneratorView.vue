@@ -9,6 +9,7 @@ import {
   NSpace
 } from 'naive-ui'
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
+const handlePreview = () => {}
 </script>
 <template>
   <n-card title="添加简历">
@@ -20,7 +21,7 @@ import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
     </n-gradient-text>
     <template #header-extra>
       <n-space>
-        <n-button type="primary">预览</n-button>
+        <n-button type="primary" :on-click="handlePreview">预览</n-button>
         <n-button type="info">提交</n-button>
       </n-space>
     </template>

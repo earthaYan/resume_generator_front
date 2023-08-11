@@ -1,8 +1,8 @@
 export interface formFieldsType {
   baseInfo: {
     name: string
-    age: string
-    experienceYears: string
+    age: number
+    experienceYears: number
     email: string
     phone: string
     briefIntroduction: string
