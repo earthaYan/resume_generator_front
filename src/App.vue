@@ -11,9 +11,10 @@ import { RouterLink, RouterView } from 'vue-router'
       }}</RouterLink>
     </nav>
   </header>
-  <section>
+  <div class="wrapper">
     <RouterView />
-  </section>
+  </div>
+ 
 </template>
 
 <style scoped lang="less">
@@ -30,7 +31,7 @@ header {
     margin-right: 20px;
   }
 }
-section {
-  padding: 0 100px;
+.wrapper {
+  padding: 0 10px;
 }
 </style>
