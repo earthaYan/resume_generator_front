@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { NCard, NGradientText, NLayout, NLayoutSider, NLayoutContent } from 'naive-ui'
+import {
+  NCard,
+  NGradientText,
+  NLayout,
+  NLayoutSider,
+  NLayoutContent,
+  NButton,
+  NSpace
+} from 'naive-ui'
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
 </script>
 <template>
@@ -10,6 +18,12 @@ import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
     >
       开始定制
     </n-gradient-text>
+    <template #header-extra>
+      <n-space>
+        <n-button type="primary">预览</n-button>
+        <n-button type="info">提交</n-button>
+      </n-space>
+    </template>
     <div class="resume-generator-wrapper">
       <n-layout has-sider sider-placement="right">
         <n-layout-content content-style="padding: 24px;">

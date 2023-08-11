@@ -19,10 +19,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style scoped lang="less">
 header {
-  height: 100px;
+  height: 50px;
   nav {
     text-align: center;
-    padding: 2rem;
     background-color: antiquewhite;
   }
   .router-link {
