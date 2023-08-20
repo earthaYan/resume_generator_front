@@ -1,30 +1,8 @@
 <script setup lang="ts">
 import { NAvatar, NDataTable, NDescriptions, NDescriptionsItem, NDivider } from 'naive-ui'
 import { generateEductionColumns, generateJobColumns } from './index.data'
-const educationInfo = [
-  {
-    time: '2020-12~2023-1',
-    school: '大学',
-    master: '学士'
-  },
-  {
-    time: '2011-12~2021-1',
-    school: '高中',
-    master: '-'
-  }
-]
-const jobInfo = [
-  {
-    time: '2020-12~2023-1',
-    company: '甲方',
-    position: '前端'
-  },
-  {
-    time: '2020-12~2023-1',
-    company: '乙方',
-    position: '后端'
-  }
-]
+import { useFormStore } from '@/stores/form'
+const { formValue } = useFormStore()
 </script>
 <template>
   <div class="resume">
@@ -36,22 +14,14 @@ const jobInfo = [
         <h2>基础信息</h2>
         <div class="item">
           <n-descriptions label-placement="left" :column="1">
-            <n-descriptions-item label="年龄"> 23 </n-descriptions-item>
-            <n-descriptions-item label="工作年限"> 2年 </n-descriptions-item>
-            <n-descriptions-item label="联系电话"> 13213556789 </n-descriptions-item>
-            <n-descriptions-item label="邮箱"> earha@gmail.com </n-descriptions-item>
-          </n-descriptions>
-        </div>
-      </div>
-      <n-divider />
-      <div class="skills block">
-        <h2>专业技能</h2>
-        <div class="item">
-          <n-descriptions label-placement="left" :column="1">
-            <n-descriptions-item label="JavaScript"> 精通 </n-descriptions-item>
-            <n-descriptions-item label="GoLang"> 了解 </n-descriptions-item>
-            <n-descriptions-item label="UE"> 熟悉 </n-descriptions-item>
-            <n-descriptions-item label="React"> 了解 </n-descriptions-item>
+            <n-descriptions-item label="年龄"> {{ formValue.baseInfo.age }}</n-descriptions-item>
+            <n-descriptions-item label="工作年限">
+              {{ formValue.baseInfo.experienceYears }}年
+            </n-descriptions-item>
+            <n-descriptions-item label="联系电话">
+              {{ formValue.baseInfo.phone }}
+            </n-descriptions-item>
+            <n-descriptions-item label="邮箱"> {{ formValue.baseInfo.email }} </n-descriptions-item>
           </n-descriptions>
         </div>
       </div>
@@ -60,39 +30,52 @@ const jobInfo = [
         <h2>求职意向</h2>
         <div class="item">
           <n-descriptions label-placement="left" :column="1">
-            <n-descriptions-item label="意向岗位"> 前端 </n-descriptions-item>
-            <n-descriptions-item label="意向城市"> 上海 </n-descriptions-item>
-            <n-descriptions-item label="薪资要求"> 100-200 </n-descriptions-item>
-            <n-descriptions-item label="求职状态"> 在职 </n-descriptions-item>
+            <n-descriptions-item label="意向岗位">
+              {{ formValue.careerObjective.position }}
+            </n-descriptions-item>
+            <n-descriptions-item label="意向城市">
+              {{ formValue.careerObjective.city }}
+            </n-descriptions-item>
+            <n-descriptions-item label="薪资要求">
+              {{ formValue.careerObjective.salary }}
+            </n-descriptions-item>
+            <n-descriptions-item label="求职状态">
+              {{ formValue.careerObjective.status }}
+            </n-descriptions-item>
+          </n-descriptions>
+        </div>
+      </div>
+      <n-divider />
+      <div class="skills block">
+        <h2>专业技能</h2>
+        <div class="item">
+          <n-descriptions label-placement="left" :column="1">
+            <n-descriptions-item v-for="skill in formValue.skills" :key="skill.name" :label="skill.name">{{ skill.percent
+            }}
+            </n-descriptions-item>
           </n-descriptions>
         </div>
       </div>
     </div>
     <div class="split"></div>
     <div class="right-side">
-      <h1 class="name">张三</h1>
+      <h1 class="name">{{ formValue.baseInfo.name }}</h1>
       <div class="block breief">
-        <p class="para">2017年毕业 ，专业软件工程</p>
+        <p class="para">{{ formValue.baseInfo.briefIntroduction }}</p>
       </div>
       <div class="block education">
         <h2>教育背景</h2>
-        <n-data-table :columns="generateEductionColumns()" :data="educationInfo" />
+        <n-data-table :columns="generateEductionColumns()" :data="formValue.educationInfo" />
       </div>
       <div class="block job">
         <h2>工作经历</h2>
-        <n-data-table :columns="generateJobColumns()" :data="jobInfo" />
+        <n-data-table :columns="generateJobColumns()" :data="formValue.workExperience" />
       </div>
       <div class="block project">
         <h2>项目经验</h2>
-        <n-descriptions label-placement="top"  :column="1">
-          <n-descriptions-item label="2020~2021">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati architecto mollitia
-            exercitationem eum, atque vero nulla dolores delectus! Dolore quo minima itaque sed
-            maxime nulla, reprehenderit labore dicta! Laudantium, iste?
-          </n-descriptions-item>
-          <n-descriptions-item label="2022~2023">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati architecto mollitia
-            exercitationem eum, atque vero nulla dolores delectus
+        <n-descriptions label-placement="top" :column="1">
+          <n-descriptions-item v-for="project in formValue.projectExperience" :key="project.time" label="2020~2021">
+            {{ project.projectInfo }}
           </n-descriptions-item>
         </n-descriptions>
       </div>
@@ -130,7 +113,7 @@ h1 {
   .block {
     margin-bottom: 20px;
 
-    > h2 {
+    >h2 {
       margin-bottom: 10px;
     }
   }
