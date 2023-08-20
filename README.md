@@ -54,3 +54,8 @@ npm run lint
 # resume_generator_front
 
 简历生成器前端
+
+## 构建docker镜像
+docker build -t vue-app .
+## 编排启动容器
+docker-compose up -d
