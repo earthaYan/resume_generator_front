@@ -9,6 +9,10 @@ export const generateEductionColumns = () => {
     {
       title: '学校信息',
       key: 'school'
+    },
+    {
+      title:'学位',
+      key:'master'
     }
   ]
 }

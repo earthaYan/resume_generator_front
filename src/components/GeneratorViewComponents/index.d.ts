@@ -21,6 +21,7 @@ export interface formFieldsType {
   workExperience: Array<{
     time: string
     workInfo: string
+    position:string
   }>
   projectExperience: Array<{
     time: string

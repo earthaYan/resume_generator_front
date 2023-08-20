@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { NAvatar, NDataTable } from 'naive-ui'
-import { generateEductionColumns, generatePersonalColumns, generateJobColumns } from './index.data'
+import { NAvatar, NDataTable, NDescriptions, NDescriptionsItem, NDivider } from 'naive-ui'
+import { generateEductionColumns, generateJobColumns } from './index.data'
 const educationInfo = [
   {
     time: '2020-12~2023-1',
-    school: '大学'
+    school: '大学',
+    master: '学士'
   },
   {
     time: '2011-12~2021-1',
-    school: '高中'
-  }
-]
-const personalInfo = [
-  {
-    birth: '2012-123',
-    address: '上海'
+    school: '高中',
+    master: '-'
   }
 ]
 const jobInfo = [
@@ -36,73 +32,69 @@ const jobInfo = [
       <div class="profile">
         <n-avatar :size="120" round src="/avatar.jpg" />
       </div>
-      <div class="contact">
-        <h2>联系方式</h2>
-        <p class="para">
-          家庭住址：72-2 <br />
-          +8612344577 <br />
-          +1233 <br />
-          example@gmail.com <br />
-          www.baidu.com <br />
-        </p>
+      <div class="baseInfo block">
+        <h2>基础信息</h2>
+        <div class="item">
+          <n-descriptions label-placement="left" :column="1">
+            <n-descriptions-item label="年龄"> 23 </n-descriptions-item>
+            <n-descriptions-item label="工作年限"> 2年 </n-descriptions-item>
+            <n-descriptions-item label="联系电话"> 13213556789 </n-descriptions-item>
+            <n-descriptions-item label="邮箱"> earha@gmail.com </n-descriptions-item>
+          </n-descriptions>
+        </div>
       </div>
-      <div class="expert">
-        <h2>专业领域</h2>
-        <p>
-          JS <br />
-          语文 <br />
-          数学 <br />
-          英语 <br />
-          政治 <br />
-        </p>
+      <n-divider />
+      <div class="skills block">
+        <h2>专业技能</h2>
+        <div class="item">
+          <n-descriptions label-placement="left" :column="1">
+            <n-descriptions-item label="JavaScript"> 精通 </n-descriptions-item>
+            <n-descriptions-item label="GoLang"> 了解 </n-descriptions-item>
+            <n-descriptions-item label="UE"> 熟悉 </n-descriptions-item>
+            <n-descriptions-item label="React"> 了解 </n-descriptions-item>
+          </n-descriptions>
+        </div>
       </div>
-      <div class="skill">
-        <h2>我的技能</h2>
-        <p>
-          技能1 <br />
-          语文1 <br />
-          数学1 <br />
-          英语1 <br />
-          政治1 <br />
-        </p>
-      </div>
-      <div class="hobby">
-        <h2>我的爱好</h2>
-        <p>
-          爱好1 <br />
-          爱好2 <br />
-          爱好3 <br />
-          爱好4 <br />
-          政治1 <br />
-        </p>
+      <n-divider />
+      <div class="jobRequire block">
+        <h2>求职意向</h2>
+        <div class="item">
+          <n-descriptions label-placement="left" :column="1">
+            <n-descriptions-item label="意向岗位"> 前端 </n-descriptions-item>
+            <n-descriptions-item label="意向城市"> 上海 </n-descriptions-item>
+            <n-descriptions-item label="薪资要求"> 100-200 </n-descriptions-item>
+            <n-descriptions-item label="求职状态"> 在职 </n-descriptions-item>
+          </n-descriptions>
+        </div>
       </div>
     </div>
     <div class="split"></div>
     <div class="right-side">
-      <h1>张三</h1>
-      <div class="block about">
-        <h2>关于我</h2>
+      <h1 class="name">张三</h1>
+      <div class="block breief">
         <p class="para">2017年毕业 ，专业软件工程</p>
       </div>
-      <div class="block personal">
-        <h2>个人信息</h2>
-        <n-data-table :columns="generatePersonalColumns()" :data="personalInfo" />
-      </div>
       <div class="block education">
-        <h2>教育信息</h2>
+        <h2>教育背景</h2>
         <n-data-table :columns="generateEductionColumns()" :data="educationInfo" />
       </div>
       <div class="block job">
         <h2>工作经历</h2>
         <n-data-table :columns="generateJobColumns()" :data="jobInfo" />
       </div>
-      <div class="block skills">
-        <h2>专业技能</h2>
-        <ul>
-          <li>JS</li>
-          <li>html</li>
-          <li>goLang</li>
-        </ul>
+      <div class="block project">
+        <h2>项目经验</h2>
+        <n-descriptions label-placement="top"  :column="1">
+          <n-descriptions-item label="2020~2021">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati architecto mollitia
+            exercitationem eum, atque vero nulla dolores delectus! Dolore quo minima itaque sed
+            maxime nulla, reprehenderit labore dicta! Laudantium, iste?
+          </n-descriptions-item>
+          <n-descriptions-item label="2022~2023">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati architecto mollitia
+            exercitationem eum, atque vero nulla dolores delectus
+          </n-descriptions-item>
+        </n-descriptions>
       </div>
     </div>
   </div>
@@ -112,26 +104,32 @@ h1 {
   font-weight: bold;
   font-size: 2em;
 }
+
 .resume {
   box-sizing: border-box;
   display: flex;
   background-color: #b0c4de;
   border: 1px solid #000;
   padding: 40px;
+
   .left-side {
     flex-grow: 0.3;
   }
+
   .right-side {
     flex-grow: 1;
     margin-top: 10px;
   }
+
   .split {
     width: 1px;
     background-color: #fff;
     margin: -40px 20px;
   }
+
   .block {
     margin-bottom: 20px;
+
     > h2 {
       margin-bottom: 10px;
     }

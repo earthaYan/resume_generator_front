@@ -31,7 +31,8 @@ const formValue = ref<formFieldsType>({
   workExperience: [
     {
       time: '',
-      workInfo: ''
+      workInfo: '',
+      position:''
     }
   ],
   educationInfo: [
@@ -59,7 +60,8 @@ const onCreate = (type: string) => {
   } else if (type === 'work') {
     return {
       time: '',
-      workInfo: ''
+      workInfo: '',
+      position:''
     }
   } else {
     return {
@@ -200,6 +202,12 @@ const onCreate = (type: string) => {
                   <n-input
                     v-model:value="formValue.workExperience[index].workInfo"
                     placeholder="请输入公司信息"
+                  />
+                </n-form-item>
+                <n-form-item path="formValue.workExperience[index].position">
+                  <n-input
+                    v-model:value="formValue.workExperience[index].position"
+                    placeholder="请输入职位信息"
                   />
                 </n-form-item>
               </div>
