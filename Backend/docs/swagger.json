@@ -1,0 +1,302 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/resume/add": {
+            "post": {
+                "description": "创建简历",
+                "tags": [
+                    "resume"
+                ],
+                "summary": "创建简历",
+                "parameters": [
+                    {
+                        "description": "简历信息",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Resume"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/resume/list": {
+            "get": {
+                "description": "获取简历列表",
+                "tags": [
+                    "resume"
+                ],
+                "summary": "获取简历列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Resume"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/resume/update": {
+            "post": {
+                "description": "编辑简历",
+                "tags": [
+                    "resume"
+                ],
+                "summary": "编辑简历",
+                "parameters": [
+                    {
+                        "description": "简历信息",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Resume"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/resume/{id}": {
+            "get": {
+                "description": "获取简历详情",
+                "tags": [
+                    "resume"
+                ],
+                "summary": "获取简历详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "简历ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Resume"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除简历",
+                "tags": [
+                    "resume"
+                ],
+                "summary": "删除简历",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "简历id",
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Resume": {
+            "type": "object",
+            "properties": {
+                "base_info": {
+                    "$ref": "#/definitions/models.ResumeBasicInfo"
+                },
+                "career_objective": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResumeCareerObjective"
+                    }
+                },
+                "education_info": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResumeEducation"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "project_experience": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResumeProjectExperience"
+                    }
+                },
+                "skil_info": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResumeSkill"
+                    }
+                },
+                "work_experience": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ResumeWorkExperience"
+                    }
+                }
+            }
+        },
+        "models.ResumeBasicInfo": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "base_info_id": {
+                    "type": "integer"
+                },
+                "brief_info": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "experience_years": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.ResumeCareerObjective": {
+            "type": "object",
+            "properties": {
+                "career_objective_id": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                },
+                "salary": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ResumeEducation": {
+            "type": "object",
+            "properties": {
+                "degree": {
+                    "type": "string"
+                },
+                "education_id": {
+                    "type": "integer"
+                },
+                "major": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                },
+                "school": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ResumeProjectExperience": {
+            "type": "object",
+            "properties": {
+                "project_exerience_id": {
+                    "type": "integer"
+                },
+                "project_info": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.ResumeSkill": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "percent": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                },
+                "skill_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.ResumeWorkExperience": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "string"
+                },
+                "resume_id": {
+                    "type": "integer"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "work_experience_id": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

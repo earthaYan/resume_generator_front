@@ -1,0 +1,195 @@
+definitions:
+  models.Resume:
+    properties:
+      base_info:
+        $ref: '#/definitions/models.ResumeBasicInfo'
+      career_objective:
+        items:
+          $ref: '#/definitions/models.ResumeCareerObjective'
+        type: array
+      education_info:
+        items:
+          $ref: '#/definitions/models.ResumeEducation'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      project_experience:
+        items:
+          $ref: '#/definitions/models.ResumeProjectExperience'
+        type: array
+      skil_info:
+        items:
+          $ref: '#/definitions/models.ResumeSkill'
+        type: array
+      work_experience:
+        items:
+          $ref: '#/definitions/models.ResumeWorkExperience'
+        type: array
+    type: object
+  models.ResumeBasicInfo:
+    properties:
+      age:
+        type: integer
+      base_info_id:
+        type: integer
+      brief_info:
+        type: string
+      email:
+        type: string
+      experience_years:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      resume_id:
+        type: integer
+    type: object
+  models.ResumeCareerObjective:
+    properties:
+      career_objective_id:
+        type: integer
+      city:
+        type: string
+      resume_id:
+        type: integer
+      salary:
+        type: string
+      status:
+        type: string
+    type: object
+  models.ResumeEducation:
+    properties:
+      degree:
+        type: string
+      education_id:
+        type: integer
+      major:
+        type: string
+      resume_id:
+        type: integer
+      school:
+        type: string
+      time:
+        type: string
+    type: object
+  models.ResumeProjectExperience:
+    properties:
+      project_exerience_id:
+        type: integer
+      project_info:
+        type: string
+      resume_id:
+        type: integer
+    type: object
+  models.ResumeSkill:
+    properties:
+      name:
+        type: string
+      percent:
+        type: string
+      resume_id:
+        type: integer
+      skill_id:
+        type: integer
+    type: object
+  models.ResumeWorkExperience:
+    properties:
+      company:
+        type: string
+      position:
+        type: string
+      resume_id:
+        type: integer
+      time:
+        type: string
+      work_experience_id:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /api/resume/{id}:
+    delete:
+      description: 删除简历
+      parameters:
+      - description: 简历id
+        in: path
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 删除简历
+      tags:
+      - resume
+    get:
+      description: 获取简历详情
+      parameters:
+      - description: 简历ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Resume'
+      summary: 获取简历详情
+      tags:
+      - resume
+  /api/resume/add:
+    post:
+      description: 创建简历
+      parameters:
+      - description: 简历信息
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.Resume'
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 创建简历
+      tags:
+      - resume
+  /api/resume/list:
+    get:
+      description: 获取简历列表
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Resume'
+            type: array
+      summary: 获取简历列表
+      tags:
+      - resume
+  /api/resume/update:
+    post:
+      description: 编辑简历
+      parameters:
+      - description: 简历信息
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/models.Resume'
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 编辑简历
+      tags:
+      - resume
+swagger: "2.0"
