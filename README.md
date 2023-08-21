@@ -59,3 +59,5 @@ npm run lint
 docker build -t vue-app .
 ## 编排启动容器
 docker-compose up -d
+## 创建数据库链接
+docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 --name mysql_resume -d mysql:5.7.42
