@@ -9,8 +9,8 @@ export const generateEductionColumns = () => {
       key: 'school'
     },
     {
-      title:'学位',
-      key:'master'
+      title: '学位',
+      key: 'degree'
     }
   ]
 }
@@ -42,4 +42,3 @@ export const generateJobColumns = () => {
     }
   ]
 }
-
