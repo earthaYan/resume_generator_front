@@ -12,12 +12,18 @@ const (
 	db_pwd  = "123456"
 )
 
+var db *sql.DB
+var err error
+
 func InitMysql() {
 	dsn := db_user + ":" + db_pwd + "@tcp(116.204.108.126:3306)/resume"
-	db, err := sql.Open("mysql", dsn)
+	db, err = sql.Open("mysql", dsn)
 	err = db.Ping()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
+}
+func getDB() *sql.DB {
+	return db
 }

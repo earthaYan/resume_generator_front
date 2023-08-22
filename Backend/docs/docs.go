@@ -146,16 +146,16 @@ const docTemplate = `{
         "models.Resume": {
             "type": "object",
             "properties": {
-                "base_info": {
+                "baseInfo": {
                     "$ref": "#/definitions/models.ResumeBasicInfo"
                 },
-                "career_objective": {
+                "careerObjective": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.ResumeCareerObjective"
                     }
                 },
-                "education_info": {
+                "educationInfo": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.ResumeEducation"
@@ -164,22 +164,19 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "name": {
-                    "type": "string"
-                },
-                "project_experience": {
+                "projectExperience": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.ResumeProjectExperience"
                     }
                 },
-                "skil_info": {
+                "skills": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.ResumeSkill"
                     }
                 },
-                "work_experience": {
+                "workExperience": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.ResumeWorkExperience"
@@ -193,16 +190,16 @@ const docTemplate = `{
                 "age": {
                     "type": "integer"
                 },
-                "base_info_id": {
-                    "type": "integer"
-                },
-                "brief_info": {
+                "briefIntroduction": {
                     "type": "string"
                 },
                 "email": {
                     "type": "string"
                 },
-                "experience_years": {
+                "experienceYears": {
+                    "type": "integer"
+                },
+                "id": {
                     "type": "integer"
                 },
                 "name": {
@@ -211,7 +208,7 @@ const docTemplate = `{
                 "phone": {
                     "type": "string"
                 },
-                "resume_id": {
+                "resumeId": {
                     "type": "integer"
                 }
             }
@@ -219,13 +216,16 @@ const docTemplate = `{
         "models.ResumeCareerObjective": {
             "type": "object",
             "properties": {
-                "career_objective_id": {
-                    "type": "integer"
-                },
                 "city": {
                     "type": "string"
                 },
-                "resume_id": {
+                "id": {
+                    "type": "integer"
+                },
+                "position": {
+                    "type": "string"
+                },
+                "resumeId": {
                     "type": "integer"
                 },
                 "salary": {
@@ -242,13 +242,13 @@ const docTemplate = `{
                 "degree": {
                     "type": "string"
                 },
-                "education_id": {
+                "id": {
                     "type": "integer"
                 },
                 "major": {
                     "type": "string"
                 },
-                "resume_id": {
+                "resumeId": {
                     "type": "integer"
                 },
                 "school": {
@@ -262,30 +262,33 @@ const docTemplate = `{
         "models.ResumeProjectExperience": {
             "type": "object",
             "properties": {
-                "project_exerience_id": {
+                "id": {
                     "type": "integer"
                 },
-                "project_info": {
+                "projectInfo": {
                     "type": "string"
                 },
-                "resume_id": {
+                "resumeId": {
                     "type": "integer"
+                },
+                "time": {
+                    "type": "string"
                 }
             }
         },
         "models.ResumeSkill": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer"
+                },
                 "name": {
                     "type": "string"
                 },
                 "percent": {
                     "type": "string"
                 },
-                "resume_id": {
-                    "type": "integer"
-                },
-                "skill_id": {
+                "resumeId": {
                     "type": "integer"
                 }
             }
@@ -296,17 +299,17 @@ const docTemplate = `{
                 "company": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "integer"
+                },
                 "position": {
                     "type": "string"
                 },
-                "resume_id": {
+                "resumeId": {
                     "type": "integer"
                 },
                 "time": {
                     "type": "string"
-                },
-                "work_experience_id": {
-                    "type": "integer"
                 }
             }
         }

@@ -2,8 +2,11 @@ package resumeController
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
+	"net/http"
 	"resume_backend/models"
+	"resume_backend/repositories"
+
+	"github.com/gin-gonic/gin"
 )
 
 // @Summary 获取简历列表
@@ -32,6 +35,15 @@ func GetSingleResume(c *gin.Context) {
 // @Success 200 {string} string "ok"
 // @Router /api/resume/add  [post]
 func CreateResume(c *gin.Context) {
+	// 从前端拿到参数
+	var resumeInfo models.Resume
+	if err := c.BindJSON(&resumeInfo); err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+	} else {
+		// 存储到数据库
+		repositories.CreateResume(resumeInfo)
+		c.IndentedJSON(http.StatusCreated, resumeInfo)
+	}
 }
 
 // @Summary 编辑简历

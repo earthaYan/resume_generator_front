@@ -1,29 +1,27 @@
 definitions:
   models.Resume:
     properties:
-      base_info:
+      baseInfo:
         $ref: '#/definitions/models.ResumeBasicInfo'
-      career_objective:
+      careerObjective:
         items:
           $ref: '#/definitions/models.ResumeCareerObjective'
         type: array
-      education_info:
+      educationInfo:
         items:
           $ref: '#/definitions/models.ResumeEducation'
         type: array
       id:
         type: integer
-      name:
-        type: string
-      project_experience:
+      projectExperience:
         items:
           $ref: '#/definitions/models.ResumeProjectExperience'
         type: array
-      skil_info:
+      skills:
         items:
           $ref: '#/definitions/models.ResumeSkill'
         type: array
-      work_experience:
+      workExperience:
         items:
           $ref: '#/definitions/models.ResumeWorkExperience'
         type: array
@@ -32,28 +30,30 @@ definitions:
     properties:
       age:
         type: integer
-      base_info_id:
-        type: integer
-      brief_info:
+      briefIntroduction:
         type: string
       email:
         type: string
-      experience_years:
+      experienceYears:
+        type: integer
+      id:
         type: integer
       name:
         type: string
       phone:
         type: string
-      resume_id:
+      resumeId:
         type: integer
     type: object
   models.ResumeCareerObjective:
     properties:
-      career_objective_id:
-        type: integer
       city:
         type: string
-      resume_id:
+      id:
+        type: integer
+      position:
+        type: string
+      resumeId:
         type: integer
       salary:
         type: string
@@ -64,11 +64,11 @@ definitions:
     properties:
       degree:
         type: string
-      education_id:
+      id:
         type: integer
       major:
         type: string
-      resume_id:
+      resumeId:
         type: integer
       school:
         type: string
@@ -77,36 +77,38 @@ definitions:
     type: object
   models.ResumeProjectExperience:
     properties:
-      project_exerience_id:
+      id:
         type: integer
-      project_info:
+      projectInfo:
         type: string
-      resume_id:
+      resumeId:
         type: integer
+      time:
+        type: string
     type: object
   models.ResumeSkill:
     properties:
+      id:
+        type: integer
       name:
         type: string
       percent:
         type: string
-      resume_id:
-        type: integer
-      skill_id:
+      resumeId:
         type: integer
     type: object
   models.ResumeWorkExperience:
     properties:
       company:
         type: string
+      id:
+        type: integer
       position:
         type: string
-      resume_id:
+      resumeId:
         type: integer
       time:
         type: string
-      work_experience_id:
-        type: integer
     type: object
 info:
   contact: {}
