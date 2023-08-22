@@ -16,9 +16,9 @@ func main() {
 	repositories.InitMysql()
 	// 初始化gin
 	r := gin.Default()
-	router := r.Group("/api/v1")
+	router := r.Group("/api")
 	ReadRouters(router)
-	docs.SwaggerInfo.BasePath = "/api/v1"
+	docs.SwaggerInfo.BasePath = "/"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run(":3000")
 }
