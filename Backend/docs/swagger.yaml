@@ -115,7 +115,7 @@ info:
 paths:
   /api/resume/{id}:
     delete:
-      description: 删除简历
+      description: 除简历
       parameters:
       - description: 简历id
         in: path
@@ -165,7 +165,7 @@ paths:
       - resume
   /api/resume/list:
     get:
-      description: 获取简历列表
+      description: 获取历列表
       responses:
         "200":
           description: OK
@@ -186,11 +186,7 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/models.Resume'
-      responses:
-        "200":
-          description: ok
-          schema:
-            type: string
+      responses: {}
       summary: 编辑简历
       tags:
       - resume

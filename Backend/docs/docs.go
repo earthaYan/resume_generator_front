@@ -46,7 +46,7 @@ const docTemplate = `{
         },
         "/api/resume/list": {
             "get": {
-                "description": "获取简历列表",
+                "description": "获取历列表",
                 "tags": [
                     "resume"
                 ],
@@ -82,14 +82,7 @@ const docTemplate = `{
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
         "/api/resume/{id}": {
@@ -118,7 +111,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "删除简历",
+                "description": "除简历",
                 "tags": [
                     "resume"
                 ],
