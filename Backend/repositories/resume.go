@@ -1,12 +1,14 @@
 package repositories
 
 import (
+	"fmt"
 	"resume_backend/models"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func CreateResume(resumeInfo models.Resume) {
+	fmt.Printf("%+v\n", resumeInfo)
 	// db := getDB()
 }
 func GetSingleResume(id string) (real string, err error) {

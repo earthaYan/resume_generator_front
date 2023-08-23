@@ -14,17 +14,17 @@ export const routes: RouteRecordRaw[] = [
     component: RegisterLoginView
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/list',
+    name: '简历列表',
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/AboutView.vue')
   },
   {
-    path:'/add',
-    name:'addResume',
-    component:()=>import('../views/GeneratorView.vue')
+    path: '/add',
+    name: '添加简历',
+    component: () => import('../views/GeneratorView.vue')
   }
 ]
 const router = createRouter({

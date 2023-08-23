@@ -38,42 +38,46 @@ export interface formFieldsType {
 export const useFormStore = defineStore('formValue', () => {
   const formValue = ref<formFieldsType>({
     baseInfo: {
-      name: '',
+      name: '李四',
       age: 26,
-      experienceYears: 1,
-      email: '',
-      phone: '',
-      briefIntroduction: ''
+      experienceYears: 3,
+      email: '256790@qq.com',
+      phone: '12345789870',
+      briefIntroduction: '一句话介绍自己'
     },
     careerObjective: {
-      position: '',
-      city: '',
-      salary: '',
-      status: ''
+      position: '前端开发',
+      city: '上海',
+      salary: '1-2k',
+      status: '在职'
     },
     workExperience: [
       {
-        time: '',
-        position: '',
-        company: ''
+        time: '2020-2023',
+        position: '前端开发',
+        company: 'xx公司'
       }
     ],
     educationInfo: [
       {
-        time: '',
-        school: '',
-        degree: ''
+        time: '2020-2023',
+        school: '大学',
+        degree: '学士'
       }
     ],
     projectExperience: [
       {
-        time: '',
-        projectInfo: ''
+        time: '2020-2023',
+        projectInfo: '项目信息项目内容'
       }
     ],
     skills: [
       {
         name: 'JavaScript',
+        percent: '熟练'
+      },
+      {
+        name: 'Node',
         percent: '熟练'
       }
     ]

@@ -10,9 +10,17 @@ import {
 } from 'naive-ui'
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
 import { useFormStore } from '@/stores/form'
-const formValue=useFormStore()
+import axios from 'axios';
+const {formValue}=useFormStore()
 const handleSubmit=()=>{
   console.log(formValue)
+  // 提交
+  axios.post('http://localhost:3000/api/resume/add',{
+    req:formValue
+  }).then(res=>{
+    console.log(res);
+    
+  })
 }
 </script>
 <template>
