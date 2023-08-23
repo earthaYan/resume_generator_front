@@ -2,7 +2,19 @@
 import { NAvatar, NDataTable, NDescriptions, NDescriptionsItem, NDivider } from 'naive-ui'
 import { generateEductionColumns, generateJobColumns } from './index.data'
 import { useFormStore } from '@/stores/form'
-const { formValue } = useFormStore()
+import { onMounted } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+const { formValue, setDefaultInfo } = useFormStore()
+const router = useRouter()
+onMounted(() => {
+  const { resume_id } = router.currentRoute.value.query
+  if (resume_id) {
+    axios.get(`http://localhost:3000/api/resume/${resume_id}`).then((res) => {
+      setDefaultInfo(res.data)
+    })
+  }
+})
 </script>
 <template>
   <div class="resume">
@@ -50,8 +62,11 @@ const { formValue } = useFormStore()
         <h2>专业技能</h2>
         <div class="item">
           <n-descriptions label-placement="left" :column="1">
-            <n-descriptions-item v-for="skill in formValue.skills" :key="skill.name" :label="skill.name">{{ skill.percent
-            }}
+            <n-descriptions-item
+              v-for="skill in formValue.skills"
+              :key="skill.name"
+              :label="skill.name"
+              >{{ skill.percent }}
             </n-descriptions-item>
           </n-descriptions>
         </div>
@@ -74,7 +89,11 @@ const { formValue } = useFormStore()
       <div class="block project">
         <h2>项目经验</h2>
         <n-descriptions label-placement="top" :column="1">
-          <n-descriptions-item v-for="project in formValue.projectExperience" :key="project.time" label="2020~2021">
+          <n-descriptions-item
+            v-for="project in formValue.projectExperience"
+            :key="project.time"
+            label="2020~2021"
+          >
             {{ project.projectInfo }}
           </n-descriptions-item>
         </n-descriptions>
@@ -113,7 +132,7 @@ h1 {
   .block {
     margin-bottom: 20px;
 
-    >h2 {
+    > h2 {
       margin-bottom: 10px;
     }
   }

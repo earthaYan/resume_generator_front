@@ -9,9 +9,9 @@ import (
 )
 
 // @Summary 获取简历列表
-// @Description 获取历列表
+// @Description 获取列表
 // @Tags resume
-// @Success 200 {array} models.Resume
+// @Success 200{array} models.Resume
 // @Router /api/resume/list  [get]
 func GetResumeList(c *gin.Context) {
 	// 和数据库交互
@@ -58,7 +58,7 @@ func CreateResume(c *gin.Context) {
 
 // @Summary 编辑简历辑简历
 // @Tags resume
-// @Param req body models.Resume true "简历信息
+// @Param req body models.Resume true "简历信息"
 // @Router /api/resume/update  [post]
 func UpdateResume(c *gin.Context) {
 	// 从前端拿到参数
@@ -73,11 +73,10 @@ func UpdateResume(c *gin.Context) {
 }
 
 // @Summary 删除简历
-// @Description 简历
+// @Description 删除简历
 // @Tags resume
-// @Param id path int  false "简历id"
-// @Success 200 {string} string "ok
-// @Router /api/resume/{id}  [delet]
+// @Param id pah int  false "简历id""
+// @Router /api/resume/{id}  [delete]
 func DeleteResume(c *gin.Context) {
 	// 从前端拿到参数
 	resumeId := c.Param("id")

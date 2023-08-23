@@ -11,15 +11,19 @@ import {
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
 import { useFormStore } from '@/stores/form'
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 const {formValue}=useFormStore()
+const router = useRouter()
 const handleSubmit=()=>{
-  console.log(formValue)
   // 提交
-  axios.post('http://localhost:3000/api/resume/add',{
-    req:formValue
-  }).then(res=>{
+  axios.post('http://localhost:3000/api/resume/add',formValue).then(res=>{
     console.log(res);
-    
+  })
+}
+const id=router.currentRoute.value.query.resume_id
+const handleUpdate=()=>{
+  axios.post('http://localhost:3000/api/resume/update',formValue).then(res=>{
+    console.log(res);
   })
 }
 </script>
@@ -28,6 +32,7 @@ const handleSubmit=()=>{
     <template #header-extra>
       <n-space>
         <n-button type="info" @click="handleSubmit">提交</n-button>
+        <n-button v-if="!!id" type="info" @click="handleUpdate">更新</n-button>
       </n-space>
     </template>
     <n-gradient-text class="resume-generator-header" gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)">

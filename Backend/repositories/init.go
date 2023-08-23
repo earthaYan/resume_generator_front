@@ -22,7 +22,6 @@ func InitMysql() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
 }
 func getDB() *sql.DB {
 	return db

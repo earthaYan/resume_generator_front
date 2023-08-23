@@ -82,7 +82,11 @@ export const useFormStore = defineStore('formValue', () => {
       }
     ]
   })
+  function setDefaultInfo(data:formFieldsType){
+    formValue.value=data
+  }
   return {
-    formValue
+    formValue,
+    setDefaultInfo
   }
 })

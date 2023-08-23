@@ -34,6 +34,8 @@ const onCreate = (type: string) => {
   }
 }
 const { formValue } = useFormStore()
+console.log(formValue,1111);
+
 </script>
 <template>
   <n-form

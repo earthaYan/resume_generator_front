@@ -4,9 +4,7 @@ definitions:
       baseInfo:
         $ref: '#/definitions/models.ResumeBasicInfo'
       careerObjective:
-        items:
-          $ref: '#/definitions/models.ResumeCareerObjective'
-        type: array
+        $ref: '#/definitions/models.ResumeCareerObjective'
       educationInfo:
         items:
           $ref: '#/definitions/models.ResumeEducation'
@@ -115,7 +113,7 @@ info:
 paths:
   /api/resume/{id}:
     delete:
-      description: 除简历
+      description: 简历
       parameters:
       - description: 简历id
         in: path
@@ -178,7 +176,6 @@ paths:
       - resume
   /api/resume/update:
     post:
-      description: 编辑简历
       parameters:
       - description: 简历信息
         in: body
@@ -187,7 +184,7 @@ paths:
         schema:
           $ref: '#/definitions/models.Resume'
       responses: {}
-      summary: 编辑简历
+      summary: 编辑简历辑简历
       tags:
       - resume
 swagger: "2.0"

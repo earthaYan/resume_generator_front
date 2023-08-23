@@ -46,11 +46,16 @@ type ResumeWorkExperience struct {
 	Company  string `json:"company"`
 }
 type Resume struct {
-	ID                int                       `json:"id"`
+	ID                string                    `json:"id"`
 	BaseInfo          ResumeBasicInfo           `json:"baseInfo"`
-	CareerObjective   []ResumeCareerObjective   `json:"careerObjective"`
+	CareerObjective   ResumeCareerObjective     `json:"careerObjective"`
 	EducationInfo     []ResumeEducation         `json:"educationInfo"`
 	ProjectExperience []ResumeProjectExperience `json:"projectExperience"`
 	SkillInfo         []ResumeSkill             `json:"skills"`
 	WorkExperience    []ResumeWorkExperience    `json:"workExperience"`
+}
+type ResumeIndex struct {
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	UpdatedAt string `json:"update_time"`
 }

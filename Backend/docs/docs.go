@@ -66,11 +66,10 @@ const docTemplate = `{
         },
         "/api/resume/update": {
             "post": {
-                "description": "编辑简历",
                 "tags": [
                     "resume"
                 ],
-                "summary": "编辑简历",
+                "summary": "编辑简历辑简历",
                 "parameters": [
                     {
                         "description": "简历信息",
@@ -111,7 +110,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "除简历",
+                "description": "简历",
                 "tags": [
                     "resume"
                 ],
@@ -143,10 +142,7 @@ const docTemplate = `{
                     "$ref": "#/definitions/models.ResumeBasicInfo"
                 },
                 "careerObjective": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/models.ResumeCareerObjective"
-                    }
+                    "$ref": "#/definitions/models.ResumeCareerObjective"
                 },
                 "educationInfo": {
                     "type": "array",

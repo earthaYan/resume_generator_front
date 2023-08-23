@@ -21,7 +21,7 @@ func main() {
 	docs.SwaggerInfo.BasePath = "/"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 		// 初始化数据库
-	repositories.InitMysql()
+		repositories.InitMysql()
 	r.Run(":3000")
 }
 
