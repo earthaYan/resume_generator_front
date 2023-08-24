@@ -3,14 +3,14 @@ import { NAvatar, NDataTable, NDescriptions, NDescriptionsItem, NDivider } from 
 import { generateEductionColumns, generateJobColumns } from './index.data'
 import { useFormStore } from '@/stores/form'
 import { onMounted } from 'vue'
-import axios from 'axios'
+import { instance } from '@/utils/api'
 import { useRouter } from 'vue-router'
 const { formValue, setDefaultInfo } = useFormStore()
 const router = useRouter()
 onMounted(() => {
   const { resume_id } = router.currentRoute.value.query
   if (resume_id) {
-    axios.get(`http://localhost:3000/api/resume/${resume_id}`).then((res) => {
+    instance.get(`/api/resume/${resume_id}`).then((res) => {
       setDefaultInfo(res.data)
     })
   }
