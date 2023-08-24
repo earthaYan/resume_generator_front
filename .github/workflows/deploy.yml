@@ -2,7 +2,7 @@ name: push-to-private-machine
 run-name: ${{ github.actor }} is deploying
 on:
   workflow_run:
-    workflows:["build-image"] #依赖的工作流程文件的名称
+    workflows: ['build-image'] #依赖的工作流程文件的名称
     types:
       - completed
 
