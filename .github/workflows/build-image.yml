@@ -1,4 +1,4 @@
-name: build-images
+name: build-image
 run-name: ${{ github.actor }} is building latest image
 on: [push]
 jobs:
@@ -8,18 +8,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Build vue_app image
-        env:  
+        env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run:  |
+        run: |
           docker build -t yanyue1215/vue_app .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push yanyue1215/vue_app
       - name: build_resume_service
-        env:  
+        env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run:  |
+        run: |
           cd Backend/    # 后端代码所在目录
           docker build -t yanyue1215/resume_service .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
