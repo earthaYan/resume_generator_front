@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3 
-      - name: Add known hosts 
+        uses: actions/checkout@v3
+      - name: Add known hosts
         run: | # 将虚拟机密钥添加到 GitHub Runner 的 "known_hosts" 文件中
           mkdir -p ~/.ssh
-          ssh-keyscan 116.204.108.126 >> ~/.ssh/known_hosts  
+          ssh-keyscan 116.204.108.126 >> ~/.ssh/known_hosts
       - name: remove old container
         run: |
-          ssh root@116.204.108.126 "docker ps -a | grep yanyue1215/vue_app | awk '{print $1}' | xargs -r docker rm -f"
-          ssh root@116.204.108.126 "docker ps -a | grep yanyue1215/resume_service | awk '{print $1}' | xargs -r docker rm -f"
-          ssh root@116.204.108.126 "docker system prune -a"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "docker ps -a | grep yanyue1215/vue_app | awk '{print $1}' | xargs -r docker rm -f"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "docker ps -a | grep yanyue1215/resume_service | awk '{print $1}' | xargs -r docker rm -f"
+          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "docker system prune -a"
       - name: pull latest front_image
-        run: docker pull yanyue1215/vue_app:latest
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "docker pull yanyue1215/vue_app:latest"
       - name: pull latest backend_image
-        run: docker pull yanyue1215/resume_service:latest
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "docker pull yanyue1215/resume_service:latest"
       - name: Deploy to Virtual Machine
-        run: ssh root@116.204.108.126 "cd /root/resume_generator_front && git pull origin master && docker-compose up -d"
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} ssh root@116.204.108.126 "cd /root/resume_generator_front && git pull origin master && docker-compose up -d"
