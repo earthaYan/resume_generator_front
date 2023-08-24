@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 
+      - name: Add known hosts 
+        run: | # 将虚拟机密钥添加到 GitHub Runner 的 "known_hosts" 文件中
+          mkdir -p ~/.ssh
+          ssh-keyscan 116.204.108.126 >> ~/.ssh/known_hosts  
       - name: remove old container
         run: |
           ssh root@116.204.108.126 "docker ps -a | grep yanyue1215/vue_app | awk '{print $1}' | xargs -r docker rm -f"
