@@ -15,11 +15,6 @@ export const routes: RouteRecordRaw[] = [
     component: RegisterLoginView
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: RegisterLoginView
-  },
-  {
     path: '/list',
     name: '简历列表',
     component: () => import('../views/AboutView.vue'),
