@@ -1,20 +1,26 @@
 <script setup lang="ts">
-import { routes } from '@/router'
 import { RouterLink, RouterView } from 'vue-router'
+import { NMessageProvider } from 'naive-ui'
+import { routes } from './router'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink class="router-link" v-for="route in routes" :key="route.path" :to="route.path">{{
-        route.name
-      }}</RouterLink>
-    </nav>
-  </header>
-  <div class="wrapper">
-    <RouterView />
-  </div>
- 
+  <n-message-provider>
+    <header>
+      <nav>
+        <RouterLink
+          class="router-link"
+          v-for="route in routes"
+          :key="route.path"
+          :to="route.path"
+          >{{ route.name }}</RouterLink
+        >
+      </nav>
+    </header>
+    <div class="wrapper">
+      <RouterView />
+    </div>
+  </n-message-provider>
 </template>
 
 <style scoped lang="less">
