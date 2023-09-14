@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth'
 import {
   NForm,
   NFormItem,
@@ -20,26 +21,28 @@ const registerValues = ref({
 const loginValues = ref({
   email: ''
 })
+const {login}= useAuthStore()
 const handleLoginClick = () => {
-  loginForm.value?.validate((errors) => {
-    if (!errors) {
-      message.success('登录参数合法')
-    } else {
-      console.log(errors)
-      message.error('登录参数不合法')
-    }
-  }).then(()=>{
-  })
+  // loginForm.value?.validate((errors) => {
+  //   if (!errors) {
+  //     message.success('登录参数合法')
+  //   } else {
+  //     console.log(errors)
+  //     message.error('登录参数不合法')
+  //   }
+  // })
+  login()
 }
 const handleRegisterClick = () => {
-  registerForm.value?.validate((errors) => {
-    if (!errors) {
-      message.success('注册参数合法')
-    } else {
-      console.log(errors)
-      message.error('注册参数不合法')
-    }
-  })
+  // registerForm.value?.validate((errors) => {
+  //   if (!errors) {
+  //     message.success('注册参数合法')
+  //   } else {
+  //     console.log(errors)
+  //     message.error('注册参数不合法')
+  //   }
+  // })
+  login()
 }
 </script>
 <template>

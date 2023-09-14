@@ -34,6 +34,7 @@ const handleDelete = (id: number) => {
 }
 </script>
 <template>
+ 列表页面
   <n-list hoverable clickable>
     <n-list-item v-for="item in list" :key="item.id">
       <n-space>

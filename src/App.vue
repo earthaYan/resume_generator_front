@@ -1,7 +1,25 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { NMessageProvider } from 'naive-ui'
+import { NMessageProvider, NButton } from 'naive-ui'
 import { routes } from './router'
+import { computed } from 'vue'
+import { useAuthStore } from './stores/auth'
+import { storeToRefs } from 'pinia'
+const authStore = useAuthStore()
+const { isLogin } = storeToRefs(authStore)
+const { logout } = authStore
+const filteredRoutes = computed(() => {
+  if (isLogin.value) {
+    return routes.filter((route) => {
+      return route.name !== 'Login'
+    })
+  } else {
+    return []
+  }
+})
+const handleLogOut = () => {
+  logout()
+}
 </script>
 
 <template>
@@ -10,11 +28,12 @@ import { routes } from './router'
       <nav>
         <RouterLink
           class="router-link"
-          v-for="route in routes"
+          v-for="route in filteredRoutes"
           :key="route.path"
           :to="route.path"
           >{{ route.name }}</RouterLink
         >
+        <n-button @click="handleLogOut" v-if="isLogin"> 登出 </n-button>
       </nav>
     </header>
     <div class="wrapper">
