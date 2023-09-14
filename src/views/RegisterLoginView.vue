@@ -21,28 +21,31 @@ const registerValues = ref({
 const loginValues = ref({
   email: ''
 })
-const {login}= useAuthStore()
+const {login,handleWebauthnLogin}= useAuthStore()
 const handleLoginClick = () => {
-  // loginForm.value?.validate((errors) => {
-  //   if (!errors) {
-  //     message.success('登录参数合法')
-  //   } else {
-  //     console.log(errors)
-  //     message.error('登录参数不合法')
-  //   }
-  // })
-  login()
+  loginForm.value?.validate((errors) => {
+    if (!errors) {
+      message.success('登录参数合法')
+      // handleWebauthn
+      handleWebauthnLogin(loginValues)
+      login()
+    } else {
+      message.error('登录参数不合法')
+    }
+  })
+
 }
 const handleRegisterClick = () => {
-  // registerForm.value?.validate((errors) => {
-  //   if (!errors) {
-  //     message.success('注册参数合法')
-  //   } else {
-  //     console.log(errors)
-  //     message.error('注册参数不合法')
-  //   }
-  // })
-  login()
+  registerForm.value?.validate((errors) => {
+    if (!errors) {
+      message.success('注册参数合法')
+      login()
+    } else {
+      console.log(errors)
+      message.error('注册参数不合法')
+    }
+  })
+ 
 }
 </script>
 <template>
