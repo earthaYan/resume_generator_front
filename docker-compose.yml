@@ -1,12 +1,11 @@
-version: "3"
+version: '3'
 
 services:
-
-  vue-app:
-    image: vue-app
+  vue_app:
+    image: yanyue1215/vue_app:latest
     ports:
-      - "8080:80"
+      - '8080:80'
   resume_service:
-    image: resume_service
+    image: yanyue1215/resume_service:latest
     ports:
-      - "3000:3000"
+      - '3000:3000'
