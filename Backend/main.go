@@ -1,42 +1,19 @@
 package main
 
 import (
-	"reflect"
-	docs "resume_backend/docs"
+	"resume_backend/pkg/utils"
 	"resume_backend/repositories"
 	"resume_backend/router"
-
-	"github.com/gin-gonic/gin"
-	swaggerfiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/gin-contrib/cors"
 )
 
 func main() {
+	loading()
 	// 初始化gin
-	r := gin.Default()
-	r.Use(cors.Default())
-	router := r.Group("/api")
-	ReadRouters(router)
-	docs.SwaggerInfo.BasePath = "/"
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-		// 初始化数据库
-		repositories.InitMysql()
+	r := router.NewRouter()
 	r.Run(":3000")
 }
-
-// ReadRouters 读取router下的路由组
-func ReadRouters(g *gin.RouterGroup) {
-	routes := router.Router{}
-	val := reflect.ValueOf(routes)
-	// 获取到该结构体有多少个方法
-	numOfMethod := val.NumMethod()
-	for i := 0; i < numOfMethod; i++ {
-		// 断言特定类型的方法
-		fn, ok := val.Method(i).Interface().(func(g *gin.RouterGroup))
-		if !ok {
-			continue
-		}
-		fn(g)
-	}
+func loading() {
+	// 初始化数据库
+	repositories.InitMysql()
+	utils.InitLog()
 }
