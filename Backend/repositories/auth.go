@@ -2,7 +2,6 @@ package repositories
 
 import (
 	"context"
-	"fmt"
 	"resume_backend/models"
 
 	"gorm.io/gorm"
@@ -27,6 +26,10 @@ func NewUserDao(ctx context.Context) *UserDao {
 
 func (s *UserDao) CreateUser(user *models.User) (err error) {
 	err = s.DB.Model(&models.User{}).Create(user).Error
-	fmt.Println("error", err)
+	return
+}
+
+func (s *UserDao) FindUserByUserId(userId uint) (user *models.User, err error) {
+	err = s.DB.Model(&models.User{}).Where("id=?", userId).First(&user).Error
 	return
 }

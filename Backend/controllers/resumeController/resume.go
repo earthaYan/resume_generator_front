@@ -3,11 +3,42 @@ package resumeController
 import (
 	"net/http"
 	"resume_backend/models"
-	"resume_backend/repositories"
+	"resume_backend/pkg/ctl"
+	"resume_backend/pkg/utils"
+	"resume_backend/service/resumeService"
 
 	"github.com/gin-gonic/gin"
 )
 
+// ResumeCreateHandler @Tags RESUME
+// @Summary 创建简历
+// @Produce json
+// @Accept json
+// @Param     data    body    resumeService.resumeService    true      ""
+// @Success 200 {object} serializer.ResponseUser "{"success":true,"data":{},"msg":"创建成功"}"
+// @Failure 500 {object} serializer.ResponseUser "{"status":500,"data":{},"Msg":{},"Error":"error"}"
+// @Router /resume/add  [post]
+func ResumeCreateHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req models.CreateResumeReq
+		if err := ctx.ShouldBind(&req); err == nil {
+			// 参数校验
+			l := resumeService.GetResumeService()
+			resp, err := l.CreateResume(ctx.Request.Context(), &req)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+				return
+			}
+			ctx.JSON(http.StatusOK, resp)
+		} else {
+			utils.LogrusObj.Infoln(err)
+			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+		}
+	}
+
+}
+
+// @Router /user/login [post]
 // @Summary 获取简历列表
 // @Description 获取列表
 // @Tags resume
@@ -23,24 +54,6 @@ func GetResumeList(c *gin.Context) {
 // @Success 200 {object} models.Resume
 // @Router /api/resume/{id}  [get]
 func GetSingleResume(c *gin.Context) {
-}
-
-// @Summary 创建简历
-// @Description 创建简历
-// @Tags resume
-// @Param req body models.Resume true "简历信息"
-// @Success 200 {string} string "ok"
-// @Router /api/resume/add  [post]
-func CreateResume(c *gin.Context) {
-	// 从前端拿到参数
-	var resumeInfo models.Resume
-	if err := c.BindJSON(&resumeInfo); err != nil {
-		c.AbortWithStatus(http.StatusBadRequest)
-	} else {
-		// 存储到数据库
-		repositories.CreateResume(resumeInfo)
-		c.IndentedJSON(http.StatusCreated, resumeInfo)
-	}
 }
 
 // @Summary 编辑简历辑简历

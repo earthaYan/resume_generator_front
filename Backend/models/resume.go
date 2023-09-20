@@ -57,3 +57,12 @@ type ResumeWorkExperience struct {
 	Position string `json:"position"`
 	Company  string `json:"company"`
 }
+type CreateResumeReq struct {
+	UserId            uint                      `json:"user_id" binding:"required"`
+	BaseInfo          ResumeBasicInfo           `json:"base_info"`
+	CareerTarget      ResumeCareerTarget        `json:"career_target"`
+	EducationInfo     []ResumeEducation         `json:"education"`
+	ProjectExperience []ResumeProjectExperience `json:"project_experience"`
+	SkillInfo         []ResumeSkill             `json:"skills"`
+	WorkExperience    []ResumeWorkExperience    `json:"work_experience"`
+}

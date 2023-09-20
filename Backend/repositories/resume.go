@@ -1,24 +1,23 @@
 package repositories
 
 import (
+	"context"
 	"resume_backend/models"
 
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/gorm"
 )
 
-func CreateResume(resumeInfo models.Resume) error {
-	return nil
-}
-func GetSingleResume(id string) error {
-	return nil
+type ResumeDao struct {
+	*gorm.DB
 }
 
-func GetResumeList() error {
-	return nil
+func NewResumeDao(ctx context.Context) *ResumeDao {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	return &ResumeDao{NewDBClient(ctx)}
 }
-func UpdateResume(resumeInfo models.Resume) error {
-	return nil
-}
-func DeleteResume(id string) error {
-	return nil
+
+func (s *ResumeDao) CreateResume(resume *models.Resume) error {
+	return s.Model(&models.Resume{}).Create(resume).Error
 }
