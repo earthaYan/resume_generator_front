@@ -39,10 +39,19 @@ export const useAuthStore = defineStore('auth', () => {
       console.log(err)
     }
   }
+  function checkLoginStatus() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      console.log('login')
+
+      isLogin.value = true
+    }
+  }
   return {
     isLogin,
     login,
     logout,
-    register
+    register,
+    checkLoginStatus
   }
 })

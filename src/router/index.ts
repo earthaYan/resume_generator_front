@@ -32,7 +32,7 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-
+  authStore.checkLoginStatus()
   if (!authStore.isLogin && to.path !== '/login') {
     // 未登录且不是访问登录页，则重定向到登录页
     next({ path: '/login' })
