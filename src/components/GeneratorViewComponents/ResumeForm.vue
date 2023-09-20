@@ -44,6 +44,9 @@ console.log(formValue, 1111)
     label-align="right"
     label-width="100"
   >
+    <n-form-item label="简历标题" path="title" label-align="left">
+      <n-input v-model:value="formValue.title" />
+    </n-form-item>
     <n-tabs>
       <n-tab-pane name="基本信息">
         <div class="section baseInfo">

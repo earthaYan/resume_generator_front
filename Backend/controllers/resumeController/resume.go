@@ -2,6 +2,7 @@ package resumeController
 
 import (
 	"net/http"
+	"resume_backend/consts"
 	"resume_backend/models"
 	"resume_backend/pkg/ctl"
 	"resume_backend/pkg/utils"
@@ -44,7 +45,26 @@ func ResumeCreateHandler() gin.HandlerFunc {
 // @Tags resume
 // @Success 200{array} models.Resume
 // @Router /api/resume/list  [get]
-func GetResumeList(c *gin.Context) {
+func ResumeListHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req models.ListResumeReq
+		if err := ctx.ShouldBind(&req); err == nil {
+			// 参数校验
+			if req.Limit == 0 {
+				req.Limit = consts.BasePageSize
+			}
+			l := resumeService.GetResumeService()
+			resp, err := l.ListResume(ctx.Request.Context(), &req)
+			if err != nil {
+				ctx.JSON(http.StatusInternalServerError, ctl.ErrorResponse(err))
+				return
+			}
+			ctx.JSON(http.StatusOK, resp)
+		} else {
+			utils.LogrusObj.Infoln(err)
+			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+		}
+	}
 }
 
 // @Summary 获取简历详情

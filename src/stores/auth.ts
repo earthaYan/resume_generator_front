@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('token', res.data.data.access_token)
       isLogin.value = true
       router.push({
-        path: '/list'
+        path: '/resumes'
       })
     } catch (err) {
       console.log(err)

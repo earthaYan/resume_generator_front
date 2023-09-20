@@ -27,6 +27,7 @@ func NewRouter() *gin.Engine {
 		authd.Use(middleware.JWT())
 		{
 			authd.POST("resume/create", resumeController.ResumeCreateHandler())
+			authd.GET("resumes", resumeController.ResumeListHandler())
 		}
 	}
 	return r

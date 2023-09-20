@@ -78,3 +78,14 @@ func ErrorResponse(err error) *TrackedErrorResponse {
 	}
 	return RespError(err, "参数错误", e.InvalidParams)
 }
+
+func ResponseList(items interface{}, total int64) Response {
+	return Response{
+		Status: e.Success,
+		Data: DataList{
+			Item:  items,
+			Total: total,
+		},
+		Msg: "操作成功",
+	}
+}

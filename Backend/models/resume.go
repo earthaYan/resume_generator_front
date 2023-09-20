@@ -1,9 +1,12 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type Resume struct {
 	gorm.Model
+	Title             string                    `json:"title" gorm:"not null"`
 	UserId            uint                      `json:"user_id"`
 	BaseInfo          ResumeBasicInfo           `json:"base_info"`
 	CareerTarget      ResumeCareerTarget        `json:"career_target"`
@@ -58,10 +61,23 @@ type ResumeWorkExperience struct {
 	Company  string `json:"company"`
 }
 type CreateResumeReq struct {
+	Title             string                    `json:"title"`
 	BaseInfo          ResumeBasicInfo           `json:"base_info"`
 	CareerTarget      ResumeCareerTarget        `json:"career_target"`
 	EducationInfo     []ResumeEducation         `json:"education"`
 	ProjectExperience []ResumeProjectExperience `json:"project_experience"`
 	SkillInfo         []ResumeSkill             `json:"skills"`
 	WorkExperience    []ResumeWorkExperience    `json:"work_experience"`
+}
+type ListResumeReq struct {
+	Limit int `json:"page_size" form:"page_size"`
+	Start int `json:"page_index" form:"page_index"`
+}
+
+type ListResumeResp struct {
+	Id        int64  `json:"id"`
+	Title     string `json:"title"`
+	Author    string `json:"author"`
+	CreatedAt int64  `json:"created_at"`
+	UpdatedAt int64  `json:"updated_at"`
 }

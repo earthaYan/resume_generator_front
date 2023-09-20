@@ -1,12 +1,10 @@
 package models
 
 import (
+	"resume_backend/consts"
+
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
-)
-
-const (
-	PassWordCost = 12 //密码加密难度
 )
 
 type User struct {
@@ -20,7 +18,7 @@ type UserServiceRegisterReq struct {
 }
 
 func (u *User) SetPassword(password string) error {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), PassWordCost)
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), consts.PassWordCost)
 	if err != nil {
 		return err
 	}

@@ -21,6 +21,7 @@ func (s *ResumeService) CreateResume(ctx context.Context, req *models.CreateResu
 	}
 	resume := &models.Resume{
 		UserId:            user.ID,
+		Title:             *&req.Title,
 		BaseInfo:          *&req.BaseInfo,
 		CareerTarget:      *&req.CareerTarget,
 		EducationInfo:     *&req.EducationInfo,

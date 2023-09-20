@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 export interface formFieldsType {
+  title: string
   base_info: {
     name: string
     age: number
@@ -37,6 +38,7 @@ export interface formFieldsType {
 
 export const useFormStore = defineStore('formValue', () => {
   const formValue = ref<formFieldsType>({
+    title: '简历1',
     base_info: {
       name: '李四',
       age: 26,
