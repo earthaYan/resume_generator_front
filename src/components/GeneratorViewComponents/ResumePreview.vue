@@ -26,14 +26,16 @@ onMounted(() => {
         <h2>基础信息</h2>
         <div class="item">
           <n-descriptions label-placement="left" :column="1">
-            <n-descriptions-item label="年龄"> {{ formValue.baseInfo.age }}</n-descriptions-item>
+            <n-descriptions-item label="年龄"> {{ formValue.base_info.age }}</n-descriptions-item>
             <n-descriptions-item label="工作年限">
-              {{ formValue.baseInfo.experienceYears }}年
+              {{ formValue.base_info.experience_years }}年
             </n-descriptions-item>
             <n-descriptions-item label="联系电话">
-              {{ formValue.baseInfo.phone }}
+              {{ formValue.base_info.phone }}
             </n-descriptions-item>
-            <n-descriptions-item label="邮箱"> {{ formValue.baseInfo.email }} </n-descriptions-item>
+            <n-descriptions-item label="邮箱">
+              {{ formValue.base_info.email }}
+            </n-descriptions-item>
           </n-descriptions>
         </div>
       </div>
@@ -43,16 +45,16 @@ onMounted(() => {
         <div class="item">
           <n-descriptions label-placement="left" :column="1">
             <n-descriptions-item label="意向岗位">
-              {{ formValue.careerObjective.position }}
+              {{ formValue.career_target.position }}
             </n-descriptions-item>
             <n-descriptions-item label="意向城市">
-              {{ formValue.careerObjective.city }}
+              {{ formValue.career_target.city }}
             </n-descriptions-item>
             <n-descriptions-item label="薪资要求">
-              {{ formValue.careerObjective.salary }}
+              {{ formValue.career_target.salary }}
             </n-descriptions-item>
             <n-descriptions-item label="求职状态">
-              {{ formValue.careerObjective.status }}
+              {{ formValue.career_target.status }}
             </n-descriptions-item>
           </n-descriptions>
         </div>
@@ -74,27 +76,27 @@ onMounted(() => {
     </div>
     <div class="split"></div>
     <div class="right-side">
-      <h1 class="name">{{ formValue.baseInfo.name }}</h1>
+      <h1 class="name">{{ formValue.base_info.name }}</h1>
       <div class="block breief">
-        <p class="para">{{ formValue.baseInfo.briefIntroduction }}</p>
+        <p class="para">{{ formValue.base_info.brief_introduction }}</p>
       </div>
       <div class="block education">
         <h2>教育背景</h2>
-        <n-data-table :columns="generateEductionColumns()" :data="formValue.educationInfo" />
+        <n-data-table :columns="generateEductionColumns()" :data="formValue.education" />
       </div>
       <div class="block job">
         <h2>工作经历</h2>
-        <n-data-table :columns="generateJobColumns()" :data="formValue.workExperience" />
+        <n-data-table :columns="generateJobColumns()" :data="formValue.work_experience" />
       </div>
       <div class="block project">
         <h2>项目经验</h2>
         <n-descriptions label-placement="top" :column="1">
           <n-descriptions-item
-            v-for="project in formValue.projectExperience"
+            v-for="project in formValue.project_experience"
             :key="project.time"
             label="2020~2021"
           >
-            {{ project.projectInfo }}
+            {{ project.project_info }}
           </n-descriptions-item>
         </n-descriptions>
       </div>

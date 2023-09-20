@@ -1,8 +1,8 @@
 package router
 
 import (
-	resumeController "resume_backend/controllers/ResumeController"
 	authcontroller "resume_backend/controllers/authController"
+	resumeController "resume_backend/controllers/resumeController"
 	"resume_backend/docs"
 	"resume_backend/middleware"
 
@@ -26,7 +26,7 @@ func NewRouter() *gin.Engine {
 		authd := v1.Group("/")
 		authd.Use(middleware.JWT())
 		{
-			authd.POST("create_resume", resumeController.CreateResume)
+			authd.POST("resume/create", resumeController.ResumeCreateHandler())
 		}
 	}
 	return r

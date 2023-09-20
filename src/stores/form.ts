@@ -1,33 +1,33 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 export interface formFieldsType {
-  baseInfo: {
+  base_info: {
     name: string
     age: number
-    experienceYears: number
+    experience_years: number
     email: string
     phone: string
-    briefIntroduction: string
+    brief_introduction: string
   }
-  careerObjective: {
+  career_target: {
     position: string
     city: string
     salary: string
     status: string
   }
-  educationInfo: Array<{
+  education: Array<{
     time: string
     school: string
     degree: string
   }>
-  workExperience: Array<{
+  work_experience: Array<{
     time: string
     position: string
     company: string
   }>
-  projectExperience: Array<{
+  project_experience: Array<{
     time: string
-    projectInfo: string
+    project_info: string
   }>
   skills: Array<{
     name: string
@@ -37,38 +37,38 @@ export interface formFieldsType {
 
 export const useFormStore = defineStore('formValue', () => {
   const formValue = ref<formFieldsType>({
-    baseInfo: {
+    base_info: {
       name: '李四',
       age: 26,
-      experienceYears: 3,
+      experience_years: 3,
       email: '256790@qq.com',
       phone: '12345789870',
-      briefIntroduction: '一句话介绍自己'
+      brief_introduction: '一句话介绍自己'
     },
-    careerObjective: {
+    career_target: {
       position: '前端开发',
       city: '上海',
       salary: '1-2k',
       status: '在职'
     },
-    workExperience: [
+    work_experience: [
       {
         time: '2020-2023',
         position: '前端开发',
         company: 'xx公司'
       }
     ],
-    educationInfo: [
+    education: [
       {
         time: '2020-2023',
         school: '大学',
         degree: '学士'
       }
     ],
-    projectExperience: [
+    project_experience: [
       {
         time: '2020-2023',
-        projectInfo: '项目信息项目内容'
+        project_info: '项目信息项目内容'
       }
     ],
     skills: [
@@ -82,8 +82,8 @@ export const useFormStore = defineStore('formValue', () => {
       }
     ]
   })
-  function setDefaultInfo(data:formFieldsType){
-    formValue.value=data
+  function setDefaultInfo(data: formFieldsType) {
+    formValue.value = data
   }
   return {
     formValue,

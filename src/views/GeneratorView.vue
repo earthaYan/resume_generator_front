@@ -11,19 +11,19 @@ import {
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
 import { useFormStore } from '@/stores/form'
 import { instance } from '@/utils/api'
-import { useRouter } from 'vue-router';
-const {formValue}=useFormStore()
+import { useRouter } from 'vue-router'
+const { formValue } = useFormStore()
 const router = useRouter()
-const handleSubmit=()=>{
+const handleSubmit = () => {
   // 提交
-  instance.post('/api/resume/add',formValue).then(res=>{
-    console.log(res);
+  instance.post('/resume/create', formValue).then((res) => {
+    console.log(res)
   })
 }
-const id=router.currentRoute.value.query.resume_id
-const handleUpdate=()=>{
-  instance.post('/api/resume/update',formValue).then(res=>{
-    console.log(res);
+const id = router.currentRoute.value.query.resume_id
+const handleUpdate = () => {
+  instance.post('/api/resume/update', formValue).then((res) => {
+    console.log(res)
   })
 }
 </script>
@@ -35,7 +35,10 @@ const handleUpdate=()=>{
         <n-button v-if="!!id" type="info" @click="handleUpdate">更新</n-button>
       </n-space>
     </template>
-    <n-gradient-text class="resume-generator-header" gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)">
+    <n-gradient-text
+      class="resume-generator-header"
+      gradient="linear-gradient(90deg, red 0%, green 50%, blue 100%)"
+    >
       开始定制
     </n-gradient-text>
     <div class="resume-generator-wrapper">
@@ -43,8 +46,15 @@ const handleUpdate=()=>{
         <n-layout-content content-style="padding: 24px;">
           <ResumeForm />
         </n-layout-content>
-        <n-layout-sider collapse-mode="width" :collapsed-width="0" width="50%" :show-collapsed-content="false"
-          show-trigger="arrow-circle" content-style="padding: 24px;" bordered>
+        <n-layout-sider
+          collapse-mode="width"
+          :collapsed-width="0"
+          width="50%"
+          :show-collapsed-content="false"
+          show-trigger="arrow-circle"
+          content-style="padding: 24px;"
+          bordered
+        >
           <ResumePreview />
         </n-layout-sider>
       </n-layout>
