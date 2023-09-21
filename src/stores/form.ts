@@ -85,7 +85,17 @@ export const useFormStore = defineStore('formValue', () => {
     ]
   })
   function setDefaultInfo(data: formFieldsType) {
-    formValue.value = data
+    const { base_info, career_target, work_experience, project_experience, education, skills } =
+      data
+    formValue.value = {
+      title: data.title,
+      base_info,
+      career_target,
+      work_experience,
+      education: education ?? [],
+      project_experience: project_experience ?? [],
+      skills: skills ?? []
+    }
   }
   return {
     formValue,

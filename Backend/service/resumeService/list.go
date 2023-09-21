@@ -27,3 +27,33 @@ func (s *ResumeService) ListResume(ctx context.Context, req *models.ListResumeRe
 	}
 	return ctl.ResponseList(tRespList, total), nil
 }
+func (s *ResumeService) DetailResume(ctx context.Context, req *models.DetailReq) (resp interface{}, err error) {
+	u, err := ctl.GetUserInfo(ctx)
+	if err != nil {
+		utils.LogrusObj.Info(ctx)
+		return
+	}
+	resume, err := repositories.NewResumeDao(ctx).FindResumeByResumeIdAndUserId(req.ResumeId, u.Id)
+
+	if err != nil {
+		utils.LogrusObj.Info(ctx)
+		return
+	}
+	var BaseInfo models.ResumeBasicInfo = resume.BaseInfo
+	var CareerTarget models.ResumeCareerTarget = resume.CareerTarget
+	var EducationInfo []models.ResumeEducation = resume.EducationInfo
+	var ProjectExperience []models.ResumeProjectExperience = resume.ProjectExperience
+	var SkillInfo []models.ResumeSkill = resume.SkillInfo
+	var WorkExperience []models.ResumeWorkExperience = resume.WorkExperience
+	v := &models.DetailResp{
+		ID:                resume.ID,
+		Title:             resume.Title,
+		BaseInfo:          BaseInfo,
+		CareerTarget:      CareerTarget,
+		EducationInfo:     EducationInfo,
+		ProjectExperience: ProjectExperience,
+		SkillInfo:         SkillInfo,
+		WorkExperience:    WorkExperience,
+	}
+	return ctl.RespSuccessWithData(v), nil
+}

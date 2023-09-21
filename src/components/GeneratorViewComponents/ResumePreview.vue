@@ -8,11 +8,18 @@ import { useRouter } from 'vue-router'
 const { formValue, setDefaultInfo } = useFormStore()
 const router = useRouter()
 onMounted(() => {
-  const { resume_id } = router.currentRoute.value.query
-  if (resume_id) {
-    instance.get(`/api/resume/${resume_id}`).then((res) => {
-      setDefaultInfo(res.data)
-    })
+  const path = router.currentRoute.value.path
+  const id = router.currentRoute.value.params.resume_id
+  if (path.indexOf('/update') > -1 && id) {
+    instance
+      .get('/resume_detail', {
+        params: {
+          resume_id: id
+        }
+      })
+      .then((res) => {
+        setDefaultInfo(res.data.data)
+      })
   }
 })
 </script>

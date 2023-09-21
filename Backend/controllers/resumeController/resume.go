@@ -36,7 +36,6 @@ func ResumeCreateHandler() gin.HandlerFunc {
 			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
 		}
 	}
-
 }
 
 // @Router /user/login [post]
@@ -73,7 +72,23 @@ func ResumeListHandler() gin.HandlerFunc {
 // @Param id path int true "简历ID"
 // @Success 200 {object} models.Resume
 // @Router /api/resume/{id}  [get]
-func GetSingleResume(c *gin.Context) {
+func ResumeDetailHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req models.DetailReq
+		if err := ctx.ShouldBind(&req); err == nil {
+			// 参数校验
+			l := resumeService.GetResumeService()
+			resp, err := l.DetailResume(ctx.Request.Context(), &req)
+			if err != nil {
+				ctx.JSON(http.StatusInternalServerError, ctl.ErrorResponse(err))
+				return
+			}
+			ctx.JSON(http.StatusOK, resp)
+		} else {
+			utils.LogrusObj.Infoln(err)
+			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+		}
+	}
 }
 
 // @Summary 编辑简历辑简历
@@ -81,6 +96,7 @@ func GetSingleResume(c *gin.Context) {
 // @Param req body models.Resume true "简历信息"
 // @Router /api/resume/update  [post]
 func UpdateResume(c *gin.Context) {
+
 }
 
 // @Summary 删除简历

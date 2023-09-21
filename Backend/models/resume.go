@@ -6,6 +6,7 @@ import (
 
 type Resume struct {
 	gorm.Model
+	ID                uint                      `json:"id" gorm:"primarykey"`
 	Title             string                    `json:"title" gorm:"not null"`
 	UserId            uint                      `json:"user_id"`
 	BaseInfo          ResumeBasicInfo           `json:"base_info"`
@@ -80,4 +81,18 @@ type ListResumeResp struct {
 	Author    string `json:"author"`
 	CreatedAt int64  `json:"created_at"`
 	UpdatedAt int64  `json:"updated_at"`
+}
+
+type DetailReq struct {
+	ResumeId string `json:"resume_id" form:"resume_id"`
+}
+type DetailResp struct {
+	ID                uint                      `json:"id"`
+	Title             string                    `json:"title"`
+	BaseInfo          ResumeBasicInfo           `json:"base_info"`
+	CareerTarget      ResumeCareerTarget        `json:"career_target"`
+	EducationInfo     []ResumeEducation         `json:"education"`
+	ProjectExperience []ResumeProjectExperience `json:"project_experience"`
+	SkillInfo         []ResumeSkill             `json:"skills"`
+	WorkExperience    []ResumeWorkExperience    `json:"work_experience"`
 }

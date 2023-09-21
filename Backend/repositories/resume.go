@@ -30,3 +30,15 @@ func (s *ResumeDao) ListResume(start, limit int, uid int64) (r []*models.Resume,
 	return
 
 }
+func (s *ResumeDao) FindResumeByResumeIdAndUserId(ResumeId string, uid int64) (r *models.Resume, err error) {
+	// err = s.DB.Model(&models.Resume{}).Where("user_id=? AND id=?", uid, ResumeId).First(&r).Error
+	// return
+	err = s.DB.Preload("BaseInfo").
+		Preload("CareerTarget").
+		Preload("EducationInfo").
+		Preload("ProjectExperience").
+		Preload("SkillInfo").
+		Preload("WorkExperience").
+		First(&r, "id = ? AND user_id = ?", ResumeId, uid).Error
+	return
+}

@@ -4,6 +4,7 @@ import { NButton, NDataTable, type DataTableColumns } from 'naive-ui'
 import { h, onMounted, ref } from 'vue'
 import type { ResumeItem } from '@/types/resume'
 import dayjs from 'dayjs'
+import router from '@/router'
 let list = ref<
   Array<{
     id: number
@@ -19,8 +20,10 @@ const getList = () => {
 onMounted(() => {
   getList()
 })
-const handleDelete = (row: ResumeItem) => {
-  console.log(row.title)
+const handleDelete = (row: ResumeItem) => {}
+const jumpToDetail = (row: ResumeItem) => {
+  const resume_id = row.id
+  router.push(`/update/${resume_id}`)
 }
 const createColumns = (): DataTableColumns<ResumeItem> => {
   return [
@@ -50,16 +53,28 @@ const createColumns = (): DataTableColumns<ResumeItem> => {
       title: '操作',
       key: 'actions',
       render(row) {
-        return h(
-          NButton,
-          {
-            strong: true,
-            tertiary: true,
-            size: 'small',
-            onClick: () => handleDelete(row)
-          },
-          { default: () => '删除' }
-        )
+        return [
+          h(
+            NButton,
+            {
+              strong: true,
+              tertiary: true,
+              size: 'small',
+              onClick: () => handleDelete(row)
+            },
+            { default: () => '删除' }
+          ),
+          h(
+            NButton,
+            {
+              strong: true,
+              tertiary: true,
+              size: 'small',
+              onClick: () => jumpToDetail(row)
+            },
+            { default: () => '详情' }
+          )
+        ]
       }
     }
   ]

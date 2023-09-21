@@ -24,6 +24,11 @@ export const routes: RouteRecordRaw[] = [
     path: '/add',
     name: '添加简历',
     component: () => import('../views/GeneratorView.vue')
+  },
+  {
+    path: '/update/:resume_id',
+    name: '修改简历',
+    component: () => import('../views/GeneratorView.vue')
   }
 ]
 const router = createRouter({
