@@ -9,8 +9,11 @@ import {
   NTabPane,
   NInputNumber
 } from 'naive-ui'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useFormStore } from '@/stores/form'
+import { instance } from '@/utils/api'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 const formRef = ref<FormInst | null>(null)
 
 const onCreate = (type: string) => {
@@ -33,7 +36,27 @@ const onCreate = (type: string) => {
     }
   }
 }
-const { formValue } = useFormStore()
+const router = useRouter()
+const formStore = useFormStore()
+const { setDefaultInfo } = formStore
+const { formValue } = storeToRefs(formStore)
+
+onMounted(() => {
+  const path = router.currentRoute.value.path
+  const id = router.currentRoute.value.params.resume_id
+  if (path.indexOf('/update') > -1 && id) {
+    instance
+      .get('/resume_detail', {
+        params: {
+          resume_id: id
+        }
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setDefaultInfo(res.data.data)
+      })
+  }
+})
 </script>
 <template>
   <n-form

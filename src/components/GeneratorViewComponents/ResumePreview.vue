@@ -2,26 +2,9 @@
 import { NAvatar, NDataTable, NDescriptions, NDescriptionsItem, NDivider } from 'naive-ui'
 import { generateEductionColumns, generateJobColumns } from './index.data'
 import { useFormStore } from '@/stores/form'
-import { onMounted } from 'vue'
-import { instance } from '@/utils/api'
-import { useRouter } from 'vue-router'
-const { formValue, setDefaultInfo } = useFormStore()
-const router = useRouter()
-onMounted(() => {
-  const path = router.currentRoute.value.path
-  const id = router.currentRoute.value.params.resume_id
-  if (path.indexOf('/update') > -1 && id) {
-    instance
-      .get('/resume_detail', {
-        params: {
-          resume_id: id
-        }
-      })
-      .then((res) => {
-        setDefaultInfo(res.data.data)
-      })
-  }
-})
+import { storeToRefs } from 'pinia'
+const formStore = useFormStore()
+const { formValue } = storeToRefs(formStore)
 </script>
 <template>
   <div class="resume">
