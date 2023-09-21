@@ -41,12 +41,6 @@ func (s *ResumeDao) FindResumeByResumeIdAndUserId(ResumeId string, uid int64) (r
 	return
 }
 
-func (s *ResumeDao) UpdateResume(uid int64, req *models.UpdateResumeReq) error {
-	// 判断该简历是否存在
-	err := s.DB.Model(&models.Resume{}).Where("id=? AND uid=?", req.Id, uid).Updates(req.Updated).Error
-	return err
-}
-
 func (s *ResumeDao) DeleteResume(uid int64, req *models.DeleteResumeReq) error {
 	var resume models.Resume
 	err := s.DB.Preload("BaseInfo").
@@ -90,4 +84,19 @@ func (s *ResumeDao) DeleteResume(uid int64, req *models.DeleteResumeReq) error {
 		return err
 	}
 	return tx.Commit().Error
+}
+func (s *ResumeDao) UpdateResume(uid int64, req *models.UpdateResumeReq) error {
+	// 判断该简历是否存在
+	var resume models.Resume
+	err := s.DB.Model(&models.Resume{}).Where("id=? AND user_id=?", req.Id, uid).First(&resume).Error
+	if err != nil {
+		return err
+	}
+	resume.BaseInfo = req.Updated.BaseInfo
+	resume.CareerTarget = req.Updated.CareerTarget
+	resume.EducationInfo = req.Updated.EducationInfo
+	resume.ProjectExperience = req.Updated.ProjectExperience
+	resume.WorkExperience = req.Updated.WorkExperience
+	resume.SkillInfo = req.Updated.SkillInfo
+	return s.DB.Save(&resume).Error
 }

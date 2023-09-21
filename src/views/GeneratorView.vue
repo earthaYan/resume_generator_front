@@ -24,7 +24,7 @@ const id = router.currentRoute.value.params.resume_id
 const handleUpdate = () => {
   instance
     .post('/resume/update', {
-      id,
+      resume_id: id,
       info: formValue
     })
     .then((res) => {
