@@ -67,9 +67,9 @@ const createColumns = (): DataTableColumns<ResumeItem> => {
           h(
             NButton,
             {
-              strong: true,
-              tertiary: true,
+              type: 'error',
               size: 'small',
+              class: 'list-button',
               onClick: () => handleDelete(row)
             },
             { default: () => '删除' }
@@ -77,20 +77,28 @@ const createColumns = (): DataTableColumns<ResumeItem> => {
           h(
             NButton,
             {
-              strong: true,
-              tertiary: true,
+              type: 'primary',
               size: 'small',
               onClick: () => jumpToDetail(row)
             },
-            { default: () => '详情' }
+            { default: () => '编辑' }
           )
         ]
       }
     }
   ]
 }
+const handleAdd = () => {
+  router.push(`/add`)
+}
 const columns = createColumns()
 </script>
 <template>
+  <n-button type="info" @click="handleAdd">添加简历</n-button>
   <n-data-table :columns="columns" :data="list" :pagination="false" :bordered="false" />
 </template>
+<style scoped>
+::v-deep .list-button {
+  margin-right: 30px;
+}
+</style>

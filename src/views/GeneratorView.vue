@@ -6,7 +6,8 @@ import {
   NLayoutSider,
   NLayoutContent,
   NButton,
-  NSpace
+  NSpace,
+  useMessage
 } from 'naive-ui'
 import { ResumeForm, ResumePreview } from '@/components/GeneratorViewComponents'
 import { useFormStore } from '@/stores/form'
@@ -14,6 +15,7 @@ import { instance } from '@/utils/api'
 import { useRouter } from 'vue-router'
 const { formValue } = useFormStore()
 const router = useRouter()
+const message = useMessage()
 const handleSubmit = () => {
   // 提交
   instance.post('/resume/create', formValue).then((res) => {
@@ -27,8 +29,9 @@ const handleUpdate = () => {
       resume_id: id,
       info: formValue
     })
-    .then((res) => {
-      console.log(res)
+    .then(() => {
+      message.success('修改成功')
+      router.back()
     })
 }
 </script>

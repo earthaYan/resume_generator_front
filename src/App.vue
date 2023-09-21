@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { NMessageProvider, NButton } from 'naive-ui'
+import { NMessageProvider, NButton, NSpace } from 'naive-ui'
 import { routes } from './router'
 import { computed } from 'vue'
 import { useAuthStore } from './stores/auth'
@@ -11,7 +11,7 @@ const { logout } = authStore
 const filteredRoutes = computed(() => {
   if (isLogin.value) {
     return routes.filter((route) => {
-      return route.name !== 'Login'
+      return route.name !== 'Login' && !route.no_show_menu
     })
   } else {
     return []
@@ -25,16 +25,18 @@ const handleLogOut = () => {
 <template>
   <n-message-provider>
     <header>
-      <nav>
-        <RouterLink
-          class="router-link"
-          v-for="route in filteredRoutes"
-          :key="route.path"
-          :to="route.path"
-          >{{ route.name }}</RouterLink
-        >
+      <n-space justify="space-between">
+        <nav>
+          <RouterLink
+            class="router-link"
+            v-for="route in filteredRoutes"
+            :key="route.path"
+            :to="route.path"
+            >{{ route.name }}</RouterLink
+          >
+        </nav>
         <n-button @click="handleLogOut" v-if="isLogin"> 登出 </n-button>
-      </nav>
+      </n-space>
     </header>
     <div class="wrapper">
       <RouterView />
@@ -45,14 +47,13 @@ const handleLogOut = () => {
 <style scoped lang="less">
 header {
   height: 50px;
-  nav {
-    text-align: center;
-    background-color: antiquewhite;
-  }
+  padding: 4px 20px;
+  background-color: lightblue;
+  margin-bottom: 30px;
   .router-link {
     font-size: 20px;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 40px;
   }
 }
 .wrapper {
