@@ -20,7 +20,17 @@ const getList = () => {
 onMounted(() => {
   getList()
 })
-const handleDelete = (row: ResumeItem) => {}
+const handleDelete = (row: ResumeItem) => {
+  const resume_id = row.id
+  instance
+    .post('/resume_delete', {
+      resume_id
+    })
+    .then((res) => {
+      console.log(res)
+      getList()
+    })
+}
 const jumpToDetail = (row: ResumeItem) => {
   const resume_id = row.id
   router.push(`/update/${resume_id}`)

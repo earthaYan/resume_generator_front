@@ -29,6 +29,8 @@ func NewRouter() *gin.Engine {
 			authd.POST("resume/create", resumeController.ResumeCreateHandler())
 			authd.GET("resumes", resumeController.ResumeListHandler())
 			authd.GET("resume_detail", resumeController.ResumeDetailHandler())
+			authd.POST("resume/update", resumeController.ResumeUpdateHandler())
+			authd.POST("resume_delete", resumeController.ResumeDeleteHandler())
 		}
 	}
 	return r

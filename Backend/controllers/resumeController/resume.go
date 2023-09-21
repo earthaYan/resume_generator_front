@@ -95,8 +95,23 @@ func ResumeDetailHandler() gin.HandlerFunc {
 // @Tags resume
 // @Param req body models.Resume true "简历信息"
 // @Router /api/resume/update  [post]
-func UpdateResume(c *gin.Context) {
-
+func ResumeUpdateHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req models.UpdateResumeReq
+		if err := ctx.ShouldBind(&req); err == nil {
+			// 参数校验
+			l := resumeService.GetResumeService()
+			resp, err := l.UpdateResume(ctx.Request.Context(), &req)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+				return
+			}
+			ctx.JSON(http.StatusOK, resp)
+		} else {
+			utils.LogrusObj.Infoln(err)
+			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+		}
+	}
 }
 
 // @Summary 删除简历
@@ -104,5 +119,21 @@ func UpdateResume(c *gin.Context) {
 // @Tags resume
 // @Param id pah int  false "简历id""
 // @Router /api/resume/{id}  [delete]
-func DeleteResume(c *gin.Context) {
+func ResumeDeleteHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req models.DeleteResumeReq
+		if err := ctx.ShouldBind(&req); err == nil {
+			// 参数校验
+			l := resumeService.GetResumeService()
+			resp, err := l.DeleteResume(ctx.Request.Context(), &req)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+				return
+			}
+			ctx.JSON(http.StatusOK, resp)
+		} else {
+			utils.LogrusObj.Infoln(err)
+			ctx.JSON(http.StatusBadRequest, ctl.ErrorResponse(err))
+		}
+	}
 }

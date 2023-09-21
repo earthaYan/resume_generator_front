@@ -96,3 +96,12 @@ type DetailResp struct {
 	SkillInfo         []ResumeSkill             `json:"skills"`
 	WorkExperience    []ResumeWorkExperience    `json:"work_experience"`
 }
+
+type UpdateResumeReq struct {
+	Id      string          `json:"resume_id" form:"resume_id"`
+	Updated CreateResumeReq `json:"info" form:"info"`
+}
+
+type DeleteResumeReq struct {
+	Id int64 `json:"resume_id" form:"resume_id"`
+}

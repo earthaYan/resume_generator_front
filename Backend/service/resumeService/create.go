@@ -36,3 +36,31 @@ func (s *ResumeService) CreateResume(ctx context.Context, req *models.CreateResu
 	}
 	return ctl.RespSuccess(), nil
 }
+func (s *ResumeService) UpdateResume(ctx context.Context, req *models.UpdateResumeReq) (resp interface{}, err error) {
+	// 拿到用户信息
+	u, err := ctl.GetUserInfo(ctx)
+	if err != nil {
+		utils.LogrusObj.Info(ctx)
+		return
+	}
+	err = repositories.NewResumeDao(ctx).UpdateResume(u.Id, req)
+	if err != nil {
+		utils.LogrusObj.Info(err)
+		return
+	}
+	return ctl.RespSuccess(), nil
+}
+
+func (s *ResumeService) DeleteResume(ctx context.Context, req *models.DeleteResumeReq) (resp interface{}, err error) {
+	u, err := ctl.GetUserInfo(ctx)
+	if err != nil {
+		utils.LogrusObj.Info(ctx)
+		return
+	}
+	err = repositories.NewResumeDao(ctx).DeleteResume(u.Id, req)
+	if err != nil {
+		utils.LogrusObj.Info(err)
+		return
+	}
+	return ctl.RespSuccess(), nil
+}

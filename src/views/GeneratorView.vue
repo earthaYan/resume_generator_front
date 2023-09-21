@@ -20,18 +20,23 @@ const handleSubmit = () => {
     console.log(res)
   })
 }
-const id = router.currentRoute.value.query.resume_id
+const id = router.currentRoute.value.params.resume_id
 const handleUpdate = () => {
-  instance.post('/api/resume/update', formValue).then((res) => {
-    console.log(res)
-  })
+  instance
+    .post('/resume/update', {
+      id,
+      info: formValue
+    })
+    .then((res) => {
+      console.log(res)
+    })
 }
 </script>
 <template>
   <n-card title="添加简历">
     <template #header-extra>
       <n-space>
-        <n-button type="info" @click="handleSubmit">提交</n-button>
+        <n-button v-if="!id" type="info" @click="handleSubmit">提交</n-button>
         <n-button v-if="!!id" type="info" @click="handleUpdate">更新</n-button>
       </n-space>
     </template>
